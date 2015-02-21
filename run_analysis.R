@@ -37,30 +37,30 @@ unzip("dataset.zip")
 X_test <- read.table("UCI HAR Dataset/test/X_test.txt")
 y_test <- read.table("UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt")
-# Add y_test as column to X_test
-X_test <- cbind(X_test, y_test)
+# Add y_test (activity) as column to X_test
+X_test_act <- cbind(X_test, y_test)
 # Add subject_test as column to X_test
-X_test <- cbind(X_test, subject_test)
+X_test_act_subj <- cbind(X_test_act, subject_test)
 
 # Read the training set and labels
 X_train <- read.table("UCI HAR Dataset/train/X_train.txt")
 y_train <- read.table("UCI HAR Dataset/train/y_train.txt")
 subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt")
 # Add y_train as column to X_train
-X_train <- cbind(X_train, y_train)
+X_train_act <- cbind(X_train, y_train)
 # Add subject_train as column to X_train
-X_train <- cbind(X_train, subject_train)
+X_train_act_subj <- cbind(X_train_act, subject_train)
 
 # Merge the two data sets
-X_tot <- rbind(X_test, X_train)
+X_tot <- rbind(X_test_act_subj, X_train_act_subj)
 
 # Read Column names from "UCI HAR Dataset/features.txt"
 col_names <- read.table("UCI HAR Dataset/features.txt", sep="@", stringsAsFactors=FALSE)
 v_col_names <- col_names[,1]
 
 # Add column labels from v_col_names include the new columns "activity" and "subject"
-v_col_names <- c( v_col_names, "activity", "subject")
-names(X_tot) <- v_col_names
+v_col_names_act_subj <- c( v_col_names, "activity", "subject")
+names(X_tot) <- v_col_names_act_subj
 
 
 # Only use columns with names including "mean" and "std". Also save the "activity" column.
