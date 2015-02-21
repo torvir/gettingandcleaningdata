@@ -3,11 +3,15 @@
 The variables in script ”run_analysis.R”
 
 **X_test**                  The data set read from ”data/UCI HAR Dataset/test/X_test.txt”
+
 **X_test_act**              X_test with ”activity” column added from ”data/UCI HAR Dataset/test/X_test.txt”
+
 **X_test_act_subj**         X_test_act with ”subject” column added from ”data/UCI HAR Dataset/test/subject_test.txt”
 
 **X_train**                 The data set read from ”data/UCI HAR Dataset/train/X_train.txt”
+
 **X_train_act**             X_train with ”activity” column added from ”data/UCI HAR Dataset/train/X_train.txt”
+
 **X_train_act_subj**        X_train_act with ”subject” column added from ”data/UCI HAR Dataset/train/subject_train.txt”
 
 **X_tot**                   X_test and X_train merged together
