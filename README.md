@@ -1,31 +1,64 @@
 # gettingandcleaningdata
 
-The variables in script ”run_analysis.R”
+The function of script ”run_analysis.R”
 
-**X_test**                  The data set read from ”data/UCI HAR Dataset/test/X_test.txt”
+The data is fetched from:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-**X_test_act**              X_test with ”activity” column added from ”data/UCI HAR Dataset/test/X_test.txt”
+- Set the project working directory.
 
-**X_test_act_subj**         X_test_act with ”subject” column added from ”data/UCI HAR Dataset/test/subject_test.txt”
+- Check if folder "data" exists, otherwise create it.
 
-**X_train**                 The data set read from ”data/UCI HAR Dataset/train/X_train.txt”
+- Set the project working directory to subdirectory "data"
 
-**X_train_act**             X_train with ”activity” column added from ”data/UCI HAR Dataset/train/X_train.txt”
+- Unzip file structure in folder "data"
 
-**X_train_act_subj**        X_train_act with ”subject” column added from ”data/UCI HAR Dataset/train/subject_train.txt”
+- The test set is in file "UCI HAR Dataset/test/X_test.txt" with activity labels
+  in "UCI HAR Dataset/test/y_test.txt", and subject information
+  in "UCI HAR Dataset/test/subject_test.txt".
+  
+- The training set is in file "UCI HAR Dataset/train/X_train.txt" with activity labels
+  in "UCI HAR Dataset/train/y_train.txt", and subject information
+  in "UCI HAR Dataset/train/subject_train.txt"
 
-**X_tot**                   X_test and X_train merged together
+- Read the test set and labels into variables.
+  The test set doesn't include columns for activities or subjects.
+  That information is retrieved from two other files
 
-**col_names**               Column labels read from ”data/UCI HAR Dataset/features.txt”. The row number from the file is
-                        combined with the label because there are duplicate labels in the file.
+- Add activity labels as a new column to the test set
 
-**v_col_names**             col_names with columns ”activity” and ”subject” added at the end. This is used to name X_tot.
+- Add subject information as a new column to the test set
 
-**X_extracted**             Columns with names including ”mean” or ”std”, (and the new columns ”activity and ”subject”),
-                        filtered from X_tot.
+- Read the training set and labels into variables
+  The training set doesn't include columns for activities or subjects.
+  That information is retrieved from two other files
 
-**activity_labels**         The names of the activities (which are represented by numbers until now) read
-                        from ”data/UCI HAR Dataset/activity_labels.txt”
+- Add activity labels as a new column to the training set
 
-**tidy_set**                X_extracted grouped by subject and by activity. Where each row is the mean calculations for
-                        all variables of the subject-activity sub group.
+- Add subject information as a new column to the training set
+
+- Merge the test set and the training set into one long data set
+
+- The data sets doesn't have descriptive column names yet.
+  Read Column names from "data/UCI HAR Dataset/features.txt"
+  There are duplicate column names, so include the row number from
+  the file in the column label e.g. "130 tBodyGyro-max()-X"
+
+- Add two column names for the two new columns "activity" and "subject"
+
+- Set the column names on data set X_tot
+
+- Extract the columns with names including "mean" and "std", as well as
+  the "activity" and "subject" columns, into a new data set.
+  Use dplyr for that.
+
+- The activities are represented by a number until now.
+  Read activity labels from "data/UCI HAR Dataset/activity_labels.txt".
+  Then convert the "activity" column into factors. And set the factor levels
+  according to the ones read from "activity_labels.txt"
+
+- Now that all columns that had duplicate names is filtered out, we can remove
+  the number in the beginning of the column names.
+  Use sub() from dplyr to do that.
+   
+- Create a tidy data set with the average of each variable for each activity and each subject.

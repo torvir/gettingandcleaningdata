@@ -63,7 +63,7 @@ v_col_names_act_subj <- c( v_col_names, "activity", "subject")
 names(X_tot) <- v_col_names_act_subj
 
 
-# Only use columns with names including "mean" and "std". Also save the "activity" column.
+# Only use columns with names including "mean" and "std" as well as the "activity" and "subject" columns.
 library(dplyr)
 X_extracted <- select(X_tot, matches("mean\\(\\)|std\\(\\)|^activity$|^subject$"))
 
